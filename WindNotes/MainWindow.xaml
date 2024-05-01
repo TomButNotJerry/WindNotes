@@ -1,0 +1,360 @@
+﻿<Window x:Class="WindNotes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+        xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
+        xmlns:local="clr-namespace:WindNotes"
+        mc:Ignorable="d"
+        Title="Notes"
+        Height="560"
+        Width="855"
+        MinHeight="560"
+        MinWidth="855"
+        WindowStyle="None"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="{x:Null}">
+    <Grid>
+        <Border Background="White">
+            <Grid>
+
+                <Border x:Name="SideMenu"
+                        HorizontalAlignment="Left"
+                        Width="200"
+                        Background="#1f1f1f"
+                        ClipToBounds="True">
+                    <Grid>
+                        <Grid x:Name="TextM"
+                              HorizontalAlignment="Left"
+                              Width="200">
+                            <Label Content="Text Files"
+                                   Foreground="White"
+                                   HorizontalAlignment="Left"
+                                   VerticalContentAlignment="Center"
+                                   Margin="10,39,0,0"
+                                   VerticalAlignment="Top"
+                                   FontSize="15"
+                                   FontWeight="Bold" />
+                            <Button x:Name="DirectoryAddButton"
+                                    Content="&#xE710;"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,39,10,0"
+                                    VerticalAlignment="Top"
+                                    Background="{x:Null}"
+                                    BorderBrush="{x:Null}"
+                                    Foreground="White"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Padding="0,0,0,0"
+                                    Height="26"
+                                    Width="14" />
+                            <ScrollViewer Margin="10,67,5,10">
+                                <StackPanel />
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Border x:Name="MainArea"
+                        Margin="200,40,0,0"
+                        BorderBrush="#262626"
+                        BorderThickness="0,1,0,0">
+                    <Grid>
+                        <Menu VerticalAlignment="Top"
+                              Height="25"
+                              BorderBrush="#262626"
+                              BorderThickness="0,0,0,1">
+                            <MenuItem x:Name="ChangeTextMode"
+                                      Foreground="#E5000000"
+                                      Header="Edit Mode"
+                                      Padding="10,0,10,0"
+                                      Height="24"
+                                      FontSize="12"
+                                      FontWeight="Bold"
+                                      FontFamily="Segoe UI"
+                                      Click="ChangeTextMode_Click">
+                            </MenuItem>
+                            <MenuItem Foreground="#E5000000"
+                                      Header="Text"
+                                      Padding="10,0,10,0"
+                                      Height="24"
+                                      FontSize="12"
+                                      FontWeight="Bold"
+                                      FontFamily="Segoe UI">
+                            </MenuItem>
+                            <MenuItem Foreground="#E5000000"
+                                      Header="Format"
+                                      Padding="10,0,10,0"
+                                      Height="24"
+                                      FontSize="12"
+                                      FontWeight="Bold"
+                                      FontFamily="Segoe UI" />
+                            <MenuItem Foreground="#E5000000"
+                                      Header="Code"
+                                      Padding="10,0,10,0"
+                                      Height="24"
+                                      FontSize="12"
+                                      FontWeight="Bold"
+                                      FontFamily="Segoe UI" />
+                        </Menu>
+                        <ScrollViewer Margin="0,25,5,0" VerticalScrollBarVisibility="Visible">
+                            <Grid>
+                                <avalonEdit:TextEditor x:Name="TextEditor"
+                                                       Foreground="Black"
+                                                       Background="{x:Null}"
+                                                       ShowLineNumbers="True"
+                                                       TextChanged="TextEditor_TextChanged">
+
+                                </avalonEdit:TextEditor>
+                                <mdxam:MarkdownScrollViewer xml:space="preserve"
+                                                            x:Name="MarkdownViewer"
+                                                            Foreground="Black"
+                                                            HorizontalContentAlignment="Left"
+                                                            VerticalContentAlignment="Top"
+                                                            Visibility="Collapsed">
+                                    #hello
+	</mdxam:MarkdownScrollViewer>
+
+                            </Grid>
+                        </ScrollViewer>
+
+                        <Border x:Name="Popup"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Width="200"
+                                Height="150"
+                                Margin="78,25,0,0"
+                                Background="#FF1F1F1F">
+                            <Grid>
+                                <Grid x:Name="PopupBar"
+                                      Margin="0,0,0,126"
+                                      Height="26">
+                                    <Label Content="Popup"
+                                           FontSize="10"
+                                           Padding="8,5,5,5"
+                                           Margin="0,0,28,0"></Label>
+                                    <Button x:Name="ExitPopup"
+                                            Content="&#xE8BB;"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Background="{x:Null}"
+                                            BorderBrush="{x:Null}"
+                                            FontFamily="Segoe MDL2 Assets"
+                                            Width="28"
+                                            Height="26"
+                                            Padding="0,0,0,0"
+                                            BorderThickness="0,0,0,0"
+                                            FontSize="10"
+                                            Click="Exit_Click"
+                                            materialDesign:ButtonAssist.CornerRadius="0,5,5,0"
+                                            Foreground="White"
+                                            Margin="172,0,0,0" />
+                                </Grid>
+                                <ScrollViewer x:Name="TextOptions"
+                                              Margin="0,26,0,0"
+                                              Visibility="Collapsed">
+                                    <StackPanel>
+                                        <Button x:Name="CreateHeader"
+                                                Background="#FF1890FF"
+                                                BorderBrush="{x:Null}"
+                                                BorderThickness="0"
+                                                Foreground="White"
+                                                Margin="5,0,0,5"
+                                                Content="Header"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="10,5,10,5"
+                                                Click="CreateHeader_Click">
+
+                                        </Button>
+                                        <Button x:Name="CreateSubtext"
+                                                Background="#FF1890FF"
+                                                BorderBrush="{x:Null}"
+                                                BorderThickness="0"
+                                                Foreground="White"
+                                                Margin="5,0,0,5"
+                                                Content="Subtext"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="10,5,10,5"
+                                                Click="CreateSubtext_Click" />
+                                    </StackPanel>
+                                </ScrollViewer>
+                                <ScrollViewer x:Name="FormatOptions"
+                                              Margin="0,26,0,0"
+                                              Visibility="Collapsed">
+                                    <StackPanel>
+                                        <Button x:Name="BoldText"
+                                                Background="#FF1890FF"
+                                                BorderBrush="{x:Null}"
+                                                BorderThickness="0"
+                                                Foreground="White"
+                                                Margin="5,0,0,5"
+                                                Content="Bold"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="10,5,10,5"
+                                                Click="BoldText_Click">
+
+                                        </Button>
+                                        <Button x:Name="ItalicText"
+                                                Background="#FF1890FF"
+                                                BorderBrush="{x:Null}"
+                                                BorderThickness="0"
+                                                Foreground="White"
+                                                Margin="5,0,0,5"
+                                                Content="Italic"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="10,5,10,5"
+                                                Click="ItalicText_Click" />
+                                        <Button x:Name="BoldItalicText"
+                                                Background="#FF1890FF"
+                                                BorderBrush="{x:Null}"
+                                                BorderThickness="0"
+                                                Foreground="White"
+                                                Margin="5,0,0,5"
+                                                Content="Bold Italic"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="10,5,10,5"
+                                                Click="BoldItalicText_Click" />
+                                    </StackPanel>
+                                </ScrollViewer>
+                                <ScrollViewer x:Name="CodeOptions"
+                                      Margin="0,26,0,0"
+                                      Visibility="Visible">
+                                    <StackPanel>
+                                        <Button Background="#FF1890FF"
+                                                BorderBrush="{x:Null}"
+                                                BorderThickness="0"
+                                                Foreground="White"
+                                                Margin="5,0,0,5"
+                                                Content="html"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="10,5,10,5"
+                                                Click="CodeFormat_Click">
+
+                                        </Button>
+                                        <Button Background="#FF1890FF"
+                                                BorderBrush="{x:Null}"
+                                                BorderThickness="0"
+                                                Foreground="White"
+                                                Margin="5,0,0,5"
+                                                Content="css"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="10,5,10,5"
+                                                Click="CodeFormat_Click">
+
+                                        </Button>
+                                        <Button Background="#FF1890FF"
+                                                BorderBrush="{x:Null}"
+                                                BorderThickness="0"
+                                                Foreground="White"
+                                                Margin="5,0,0,5"
+                                                Content="javascript"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="10,5,10,5"
+                                                Click="CodeFormat_Click">
+
+                                        </Button>
+                                        <Button Background="#FF1890FF"
+                                                BorderBrush="{x:Null}"
+                                                BorderThickness="0"
+                                                Foreground="White"
+                                                Margin="5,0,0,5"
+                                                Content="python"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="10,5,10,5"
+                                                Click="CodeFormat_Click">
+
+                                        </Button>
+                                        <Button Background="#FF1890FF"
+                                                BorderBrush="{x:Null}"
+                                                BorderThickness="0"
+                                                Foreground="White"
+                                                Margin="5,0,0,5"
+                                                Content="cpp"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="10,5,10,5"
+                                                Click="CodeFormat_Click">
+
+                                        </Button>
+                                        <Button Background="#FF1890FF"
+                                                BorderBrush="{x:Null}"
+                                                BorderThickness="0"
+                                                Foreground="White"
+                                                Margin="5,0,0,5"
+                                                Content="csharp"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="10,5,10,5"
+                                                Click="CodeFormat_Click">
+
+                                        </Button>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+                <Grid x:Name="Topbar"
+                      VerticalAlignment="Top"
+                      Height="40">
+                    <Label Content="Wind Notes"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           VerticalContentAlignment="Center"
+                           Margin="10,0,0,0" />
+
+                    <Button x:Name="Minimize"
+                            Content="&#xE921;"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            FontFamily="Segoe MDL2 Assets"
+                            Width="35"
+                            Height="32"
+                            Padding="0,0,0,0"
+                            BorderThickness="0,0,0,0"
+                            FontSize="10"
+                            Margin="0,0,75,0"
+                            Click="Minimize_Click"
+                            materialDesign:ButtonAssist.CornerRadius="5,0,0,5"
+                            Foreground="Black" />
+
+                    <Button x:Name="Maximize"
+                            Content="&#xE922;"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            FontFamily="Segoe MDL2 Assets"
+                            Width="35"
+                            Height="32"
+                            Padding="0,0,0,0"
+                            BorderThickness="0,0,0,0"
+                            FontSize="10"
+                            Margin="0,0,40,0"
+                            Click="Maximize_Click"
+                            materialDesign:ButtonAssist.CornerRadius="0"
+                            Foreground="Black" />
+
+                    <Button x:Name="Exit"
+                            Content="&#xE8BB;"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            FontFamily="Segoe MDL2 Assets"
+                            Width="35"
+                            Height="32"
+                            Padding="0,0,0,0"
+                            BorderThickness="0,0,0,0"
+                            FontSize="10"
+                            Margin="0,0,5,0"
+                            Click="Exit_Click"
+                            materialDesign:ButtonAssist.CornerRadius="0,5,5,0"
+                            Foreground="Black" />
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
