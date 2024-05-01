@@ -98,6 +98,13 @@
                                       FontSize="12"
                                       FontWeight="Bold"
                                       FontFamily="Segoe UI" />
+                            <MenuItem Foreground="#E5000000"
+                                      Header="AI"
+                                      Padding="10,0,10,0"
+                                      Height="24"
+                                      FontSize="12"
+                                      FontWeight="Bold"
+                                      FontFamily="Segoe UI" />
                         </Menu>
                         <ScrollViewer Margin="0,25,5,0" VerticalScrollBarVisibility="Visible">
                             <Grid>
@@ -105,7 +112,8 @@
                                                        Foreground="Black"
                                                        Background="{x:Null}"
                                                        ShowLineNumbers="True"
-                                                       TextChanged="TextEditor_TextChanged">
+                                                       TextChanged="TextEditor_TextChanged"
+                                                       WordWrap="True">
 
                                 </avalonEdit:TextEditor>
                                 <mdxam:MarkdownScrollViewer xml:space="preserve"
@@ -220,7 +228,7 @@
                                 </ScrollViewer>
                                 <ScrollViewer x:Name="CodeOptions"
                                       Margin="0,26,0,0"
-                                      Visibility="Visible">
+                                      Visibility="Collapsed">
                                     <StackPanel>
                                         <Button Background="#FF1890FF"
                                                 BorderBrush="{x:Null}"
@@ -290,6 +298,32 @@
                                         </Button>
                                     </StackPanel>
                                 </ScrollViewer>
+                                <Grid x:Name="AI"
+                                              Margin="0,26,0,0"
+                                              Visibility="Visible">
+                                    <TextBox x:Name="AIPromptBox"
+                                             Margin="5,5,5,0"
+                                             VerticalAlignment="Top"
+                                             Height="83"
+                                             Foreground="White"
+                                             Text="Hello AI! Please summarize the text below."
+                                             TextWrapping="Wrap">
+                                        
+                                    </TextBox>
+                                    <Button x:Name="SubmitToAI"
+                                            Background="#FF1890FF"
+                                            BorderBrush="{x:Null}"
+                                            BorderThickness="0"
+                                            Foreground="White"
+                                            Margin="5,0,5,5"
+                                            Content="Submit"
+                                            HorizontalContentAlignment="Left"
+                                            Padding="10,0,10,0"
+                                            VerticalAlignment="Bottom"
+                                            Height="26"
+                                            FontSize="12"
+                                            Click="SubmitToAI_Click" />
+                                </Grid>
                             </Grid>
                         </Border>
                     </Grid>

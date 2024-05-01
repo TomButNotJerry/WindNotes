@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WindNotes.Functions;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WindNotes
@@ -125,21 +126,25 @@ namespace WindNotes
 
         #endregion
 
-        #endregion
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        #region Code Options
 
         private void CodeFormat_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button clickedButton)
+            if (sender is Button ActivatedBTN)
             {
-                AddFormatToString($"```{clickedButton.Content}\n{TextEditor.SelectedText}\n```");
-                Debug.WriteLine(clickedButton.Content);
+                AddFormatToString($"```{ActivatedBTN.Content}\n{TextEditor.SelectedText}\n```");
+                Debug.WriteLine(ActivatedBTN.Content);
 
             }
+        }
+
+        #endregion
+
+        #endregion
+
+        private void SubmitToAI_Click(object sender, RoutedEventArgs e)
+        {
+            TextEditor.TextArea.PerformTextInput(Gemini.SendToGemini(AIPromptBox.Text, TextEditor.SelectedText));
         }
     }
 }
