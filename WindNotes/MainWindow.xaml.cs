@@ -39,6 +39,8 @@ namespace WindNotes
             InitializeComponent();
 
             //TextFileWatcher.Created += (s, e) => this.Dispatcher.Invoke(() => RefreshScriptList());
+
+            MarkdownViewer.Markdown = "";
         }
 
         #region Window Editing
@@ -61,14 +63,52 @@ namespace WindNotes
         #endregion
 
         #region Markdown Parity
-        private void TextEditor_TextChanged(object sender, EventArgs e)
-        {
-            MarkdownViewer.Markdown = TextEditor.Text;
-        }
+        private void TextEditor_TextChanged(object sender, EventArgs e) => MarkdownViewer.Markdown = TextEditor.Text;
 
         #endregion
 
         #region Menu
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem ActivatedBTN)
+            {
+                PopupMenuShow(ActivatedBTN.Header.ToString());
+            }
+        }
+
+
+        void PopupMenuShow(string HeaderName)
+        {
+            TextOptions.Visibility = Visibility.Collapsed;
+            FormatOptions.Visibility = Visibility.Collapsed;
+            CodeOptions.Visibility = Visibility.Collapsed;
+            AI.Visibility = Visibility.Collapsed;
+
+            switch (HeaderName)
+            {
+                case "Text":
+                    TextOptions.Visibility = Visibility.Visible;
+                    Popup.Margin = new Thickness(78, 25, 0, 0);
+                    break;
+                case "Format":
+                    FormatOptions.Visibility = Visibility.Visible;
+                    Popup.Margin = new Thickness(122, 25, 0, 0);
+                    break;
+                case "Code":
+                    CodeOptions.Visibility = Visibility.Visible;
+                    Popup.Margin = new Thickness(183, 25, 0, 0);
+                    break;
+                case "AI":
+                    AI.Visibility = Visibility.Visible;
+                    Popup.Margin = new Thickness(232, 25, 0, 0);
+                    break;
+            }
+
+            Popup.Visibility = Visibility.Visible;
+        }
+
+        private void ExitPopup_Click(object sender, RoutedEventArgs e) => Popup.Visibility = Visibility.Collapsed;
+
 
         private void ChangeTextMode_Click(object sender, RoutedEventArgs e)
         {
@@ -90,18 +130,12 @@ namespace WindNotes
 
         private void CreateHeader_Click(object sender, RoutedEventArgs e)
         {
-            if (TextEditor.LineCount > 1)
-                TextEditor.TextArea.PerformTextInput("\n");
-
-            TextEditor.Text = TextEditor.Text.Insert(TextEditor.SelectionStart, "# ");
+            TextEditor.Text = TextEditor.Text.Insert(TextEditor.Document.GetLineByNumber(TextEditor.Document.GetLineByOffset(TextEditor.CaretOffset).LineNumber).Offset, "# ");
         }
 
         private void CreateSubtext_Click(object sender, RoutedEventArgs e)
         {
-            if (TextEditor.LineCount > 1)
-                TextEditor.TextArea.PerformTextInput("\n");
-
-            TextEditor.Text = TextEditor.Text.Insert(TextEditor.SelectionStart, "### ");
+            TextEditor.Text = TextEditor.Text.Insert(TextEditor.Document.GetLineByNumber(TextEditor.Document.GetLineByOffset(TextEditor.CaretOffset).LineNumber).Offset, "### ");
         }
 
         #endregion
@@ -140,11 +174,14 @@ namespace WindNotes
 
         #endregion
 
-        #endregion
-
+        #region Gemini Integration
         private void SubmitToAI_Click(object sender, RoutedEventArgs e)
         {
             TextEditor.TextArea.PerformTextInput(Gemini.SendToGemini(AIPromptBox.Text, TextEditor.SelectedText));
         }
+
+        #endregion
+
+        #endregion
     }
 }

@@ -82,7 +82,8 @@
                                       Height="24"
                                       FontSize="12"
                                       FontWeight="Bold"
-                                      FontFamily="Segoe UI">
+                                      FontFamily="Segoe UI"
+                                      Click="MenuItem_Click">
                             </MenuItem>
                             <MenuItem Foreground="#E5000000"
                                       Header="Format"
@@ -90,23 +91,27 @@
                                       Height="24"
                                       FontSize="12"
                                       FontWeight="Bold"
-                                      FontFamily="Segoe UI" />
+                                      FontFamily="Segoe UI"
+                                      Click="MenuItem_Click" />
                             <MenuItem Foreground="#E5000000"
                                       Header="Code"
                                       Padding="10,0,10,0"
                                       Height="24"
                                       FontSize="12"
                                       FontWeight="Bold"
-                                      FontFamily="Segoe UI" />
+                                      FontFamily="Segoe UI"
+                                      Click="MenuItem_Click" />
                             <MenuItem Foreground="#E5000000"
                                       Header="AI"
                                       Padding="10,0,10,0"
                                       Height="24"
                                       FontSize="12"
                                       FontWeight="Bold"
-                                      FontFamily="Segoe UI" />
+                                      FontFamily="Segoe UI"
+                                      Click="MenuItem_Click" />
                         </Menu>
-                        <ScrollViewer Margin="0,25,5,0" VerticalScrollBarVisibility="Visible">
+                        <ScrollViewer Margin="0,25,5,0"
+                                      VerticalScrollBarVisibility="Visible">
                             <Grid>
                                 <avalonEdit:TextEditor x:Name="TextEditor"
                                                        Foreground="Black"
@@ -133,8 +138,9 @@
                                 VerticalAlignment="Top"
                                 Width="200"
                                 Height="150"
-                                Margin="78,25,0,0"
-                                Background="#FF1F1F1F">
+                                Margin="232,25,0,0"
+                                Background="#FF1F1F1F"
+                                Visibility="Collapsed">
                             <Grid>
                                 <Grid x:Name="PopupBar"
                                       Margin="0,0,0,126"
@@ -155,7 +161,7 @@
                                             Padding="0,0,0,0"
                                             BorderThickness="0,0,0,0"
                                             FontSize="10"
-                                            Click="Exit_Click"
+                                            Click="ExitPopup_Click"
                                             materialDesign:ButtonAssist.CornerRadius="0,5,5,0"
                                             Foreground="White"
                                             Margin="172,0,0,0" />
@@ -227,8 +233,8 @@
                                     </StackPanel>
                                 </ScrollViewer>
                                 <ScrollViewer x:Name="CodeOptions"
-                                      Margin="0,26,0,0"
-                                      Visibility="Collapsed">
+                                              Margin="0,26,0,0"
+                                              Visibility="Collapsed">
                                     <StackPanel>
                                         <Button Background="#FF1890FF"
                                                 BorderBrush="{x:Null}"
@@ -299,8 +305,8 @@
                                     </StackPanel>
                                 </ScrollViewer>
                                 <Grid x:Name="AI"
-                                              Margin="0,26,0,0"
-                                              Visibility="Visible">
+                                      Margin="0,26,0,0"
+                                      Visibility="Visible">
                                     <TextBox x:Name="AIPromptBox"
                                              Margin="5,5,5,0"
                                              VerticalAlignment="Top"
@@ -308,7 +314,7 @@
                                              Foreground="White"
                                              Text="Hello AI! Please summarize the text below."
                                              TextWrapping="Wrap">
-                                        
+
                                     </TextBox>
                                     <Button x:Name="SubmitToAI"
                                             Background="#FF1890FF"
