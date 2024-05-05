@@ -177,7 +177,8 @@ namespace WindNotes
         #region Gemini Integration
         private void SubmitToAI_Click(object sender, RoutedEventArgs e)
         {
-            TextEditor.TextArea.PerformTextInput(Gemini.SendToGemini(AIPromptBox.Text, TextEditor.SelectedText));
+            Debug.WriteLine(TextEditor.SelectedText);
+            AddFormatToString($"{TextEditor.SelectedText}\n\n{Gemini.SendToGemini(AIPromptBox.Text, TextEditor.SelectedText)}");
         }
 
         #endregion

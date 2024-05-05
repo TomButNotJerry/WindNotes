@@ -26,13 +26,6 @@ namespace WindNotes.Functions
                 }
 
             }
-            //public List<GenConfig> generationConfig;
-            //public class GenConfig
-            //{
-            //    public double temperature { get; set; }
-            //    public double maxOutputTokens { get; set; }
-            //    public double temperature { get; set; }
-            //}
         }
         #endregion
 
@@ -75,7 +68,7 @@ namespace WindNotes.Functions
             if (response.IsSuccessful == true)
             {
                 dynamic ResponseJSON = JsonConvert.DeserializeObject(response.Content);
-                return (string)ResponseJSON["candidates"][0]["content"]["parts"][0]["text"];
+                return (string)ResponseJSON.candidates[0].content.parts[0].text;
             }
             else
                 return response.Content;
